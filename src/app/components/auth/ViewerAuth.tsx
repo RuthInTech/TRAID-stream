@@ -1,16 +1,56 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Play, Eye, EyeOff, ArrowLeft, Mail, Lock, User } from "lucide-react";
+import { Play, Eye, EyeOff, ArrowLeft, Mail, Lock, User, AlertCircle } from "lucide-react";
+import { useAuth } from "../../../api/hooks";
 
 export function ViewerAuth() {
   const navigate = useNavigate();
+  const { login, register, loading, error } = useAuth();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [validationError, setValidationError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): boolean => {
+    if (!form.email || !form.password) {
+      setValidationError("Email and password are required");
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      setValidationError("Please enter a valid email address");
+      return false;
+    }
+    if (form.password.length < 6) {
+      setValidationError("Password must be at least 6 characters");
+      return false;
+    }
+    if (mode === "signup" && !form.name) {
+      setValidationError("Full name is required");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/home");
+    setValidationError(null);
+
+    if (!validateForm()) return;
+
+    try {
+      if (mode === "login") {
+        await login({ email: form.email, password: form.password });
+        navigate("/home");
+      } else {
+        await register({ name: form.name, email: form.email, password: form.password });
+        // After successful registration, auto-login
+        await login({ email: form.email, password: form.password });
+        navigate("/home");
+      }
+    } catch (err: any) {
+      console.error("Auth error:", err);
+      // Error is handled by useAuth hook
+    }
   };
 
   return (
@@ -98,6 +138,16 @@ export function ViewerAuth() {
               {mode === "login" ? "Sign in to continue watching." : "Create your free viewer account."}
             </p>
 
+            {/* Error Display */}
+            {(error || validationError) && (
+              <div className="mb-4 p-3 rounded-lg flex gap-3" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)" }}>
+                <AlertCircle size={18} style={{ color: "#EF4444", flexShrink: 0, marginTop: "0.25rem" }} />
+                <p style={{ color: "#FCA5A5", fontSize: "0.875rem", lineHeight: 1.5 }}>
+                  {error || validationError}
+                </p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {mode === "signup" && (
                 <div>
@@ -154,12 +204,27 @@ export function ViewerAuth() {
               </div>
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full py-3 rounded-lg font-semibold transition-all duration-200"
-                style={{ background: "#C9A227", color: "#0B0B12", fontSize: "0.95rem", marginTop: "0.5rem" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#E0B83A")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#C9A227")}
+                style={{ 
+                  background: loading ? "#8B8799" : "#C9A227", 
+                  color: "#0B0B12", 
+                  fontSize: "0.95rem", 
+                  marginTop: "0.5rem",
+                  opacity: loading ? 0.7 : 1,
+                  cursor: loading ? "not-allowed" : "pointer"
+                }}
+                onMouseEnter={e => !loading && (e.currentTarget.style.background = "#E0B83A")}
+                onMouseLeave={e => !loading && (e.currentTarget.style.background = "#C9A227")}
               >
-                {mode === "login" ? "Sign In" : "Create Account"}
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    {mode === "login" ? "Signing in..." : "Creating account..."}
+                  </span>
+                ) : (
+                  mode === "login" ? "Sign In" : "Create Account"
+                )}
               </button>
             </form>
 
