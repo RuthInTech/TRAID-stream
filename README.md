@@ -1,7 +1,6 @@
 
   # Streaming Platform UI Design
 
-  This is a code bundle for Streaming Platform UI Design. The original project is available at https://www.figma.com/design/Kzqhz2v07wenJAu7hG11gQ/Streaming-Platform-UI-Design.
 
   ## Running the code
 
