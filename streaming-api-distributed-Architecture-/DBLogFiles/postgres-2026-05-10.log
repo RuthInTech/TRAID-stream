@@ -1,0 +1,70 @@
+2026-05-10 12:45:50.498 UTC [41] LOG:  starting PostgreSQL 15.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+2026-05-10 12:45:50.503 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-05-10 12:45:50.517 UTC [45] LOG:  database system was shut down at 2026-05-10 12:45:49 UTC
+2026-05-10 12:45:50.531 UTC [41] LOG:  database system is ready to accept connections
+2026-05-10 12:45:50.831 UTC [41] LOG:  received fast shutdown request
+2026-05-10 12:45:50.836 UTC [41] LOG:  aborting any active transactions
+2026-05-10 12:45:50.841 UTC [41] LOG:  background worker "logical replication launcher" (PID 48) exited with exit code 1
+2026-05-10 12:45:50.842 UTC [43] LOG:  shutting down
+2026-05-10 12:45:50.846 UTC [43] LOG:  checkpoint starting: shutdown immediate
+2026-05-10 12:45:51.173 UTC [43] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.079 s, sync=0.233 s, total=0.331 s; sync files=301, longest=0.007 s, average=0.001 s; distance=4239 kB, estimate=4239 kB
+2026-05-10 12:45:51.193 UTC [41] LOG:  database system is shut down
+2026-05-10 12:45:51.286 UTC [1] LOG:  starting PostgreSQL 15.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 14.2.0) 14.2.0, 64-bit
+2026-05-10 12:45:51.289 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-05-10 12:45:51.289 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-05-10 12:45:51.297 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-05-10 12:45:51.308 UTC [59] LOG:  database system was shut down at 2026-05-10 12:45:51 UTC
+2026-05-10 12:45:51.320 UTC [1] LOG:  database system is ready to accept connections
+2026-05-10 12:45:54.656 UTC [64] ERROR:  function uuid_generate_v4() does not exist at character 51
+2026-05-10 12:45:54.656 UTC [64] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2026-05-10 12:45:54.656 UTC [64] STATEMENT:  CREATE TABLE users (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	name VARCHAR(255) NOT NULL UNIQUE,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	created_date TIMESTAMPTZ DEFAULT NOW(),
+	subscription_id UUID UNIQUE
+	)
+2026-05-10 12:51:10.920 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 12:51:23.852 UTC [57] LOG:  checkpoint complete: wrote 110 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=12.734 s, sync=0.114 s, total=12.933 s; sync files=73, longest=0.044 s, average=0.002 s; distance=474 kB, estimate=474 kB
+2026-05-10 12:54:10.444 UTC [98] ERROR:  function uuid_generate_v4() does not exist at character 51
+2026-05-10 12:54:10.444 UTC [98] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2026-05-10 12:54:10.444 UTC [98] STATEMENT:  CREATE TABLE users (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	name VARCHAR(255) NOT NULL UNIQUE,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	created_date TIMESTAMPTZ DEFAULT NOW(),
+	subscription_id UUID UNIQUE
+	)
+2026-05-10 12:56:28.647 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 12:56:31.034 UTC [57] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.221 s, sync=0.070 s, total=2.388 s; sync files=17, longest=0.037 s, average=0.005 s; distance=91 kB, estimate=435 kB
+2026-05-10 13:01:48.154 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:02:02.157 UTC [57] LOG:  checkpoint complete: wrote 118 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=13.878 s, sync=0.112 s, total=14.004 s; sync files=102, longest=0.042 s, average=0.002 s; distance=656 kB, estimate=656 kB
+2026-05-10 13:12:26.638 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:12:27.169 UTC [57] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.504 s, sync=0.005 s, total=0.532 s; sync files=2, longest=0.004 s, average=0.003 s; distance=7 kB, estimate=591 kB
+2026-05-10 13:23:07.038 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:23:09.302 UTC [57] LOG:  checkpoint complete: wrote 22 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.187 s, sync=0.043 s, total=2.263 s; sync files=16, longest=0.013 s, average=0.003 s; distance=14 kB, estimate=533 kB
+2026-05-10 13:33:48.891 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:33:49.766 UTC [57] LOG:  checkpoint complete: wrote 9 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.842 s, sync=0.009 s, total=0.875 s; sync files=7, longest=0.004 s, average=0.002 s; distance=9 kB, estimate=481 kB
+2026-05-10 13:34:44.369 UTC [119] ERROR:  relation "vids" does not exist at character 15
+2026-05-10 13:34:44.369 UTC [119] STATEMENT:  select * from vids
+	;
+2026-05-10 13:39:09.840 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:39:10.297 UTC [57] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.422 s, sync=0.014 s, total=0.458 s; sync files=5, longest=0.009 s, average=0.003 s; distance=2 kB, estimate=433 kB
+2026-05-10 13:41:07.250 UTC [119] ERROR:  syntax error at or near "dt" at character 1
+2026-05-10 13:41:07.250 UTC [119] STATEMENT:  dt vids;
+2026-05-10 13:41:10.525 UTC [119] ERROR:  syntax error at or near "d" at character 1
+2026-05-10 13:41:10.525 UTC [119] STATEMENT:  d vids;
+2026-05-10 13:41:14.264 UTC [119] ERROR:  syntax error at or near "-" at character 1
+2026-05-10 13:41:14.264 UTC [119] STATEMENT:  -d vids;
+2026-05-10 13:41:18.825 UTC [119] ERROR:  syntax error at or near "tb" at character 1
+2026-05-10 13:41:18.825 UTC [119] STATEMENT:  tb vids;
+2026-05-10 13:41:24.124 UTC [119] ERROR:  syntax error at or near "vids" at character 1
+2026-05-10 13:41:24.124 UTC [119] STATEMENT:  vids;
+2026-05-10 13:44:30.268 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:44:31.209 UTC [57] LOG:  checkpoint complete: wrote 9 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.913 s, sync=0.009 s, total=0.942 s; sync files=6, longest=0.006 s, average=0.002 s; distance=7 kB, estimate=390 kB
+2026-05-10 13:49:51.285 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 13:49:51.729 UTC [57] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.419 s, sync=0.010 s, total=0.445 s; sync files=5, longest=0.006 s, average=0.002 s; distance=3 kB, estimate=352 kB
+2026-05-10 14:00:34.136 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 14:00:34.586 UTC [57] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.426 s, sync=0.008 s, total=0.450 s; sync files=5, longest=0.005 s, average=0.002 s; distance=3 kB, estimate=317 kB
+2026-05-10 14:16:39.199 UTC [57] LOG:  checkpoint starting: time
+2026-05-10 14:16:39.709 UTC [57] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.451 s, sync=0.028 s, total=0.519 s; sync files=5, longest=0.021 s, average=0.006 s; distance=4 kB, estimate=286 kB
